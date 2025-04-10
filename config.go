@@ -40,7 +40,6 @@ type Config struct {
 type ServicesConf struct {
 	Rpz struct {
 		ZoneName    string `validate:"required"`
-		Primary     string `validate:"required"` // XXX: must be an address that DnsEngine listens to
 		SerialCache string `validate:"required"`
 	}
 
@@ -103,19 +102,19 @@ type SourceConf struct {
 type PolicyConf struct {
 	Logfile string
 	//	Logger    *log.Logger
-	Whitelist struct {
+	Allowlist struct {
 		Action string `validate:"required"`
 	}
-	Blacklist struct {
+	Denylist struct {
 		Action string `validate:"required"`
 	}
-	Greylist GreylistConf
+	Doubtlist DoubtlistConf
 }
 
 type ListConf struct {
 }
 
-type GreylistConf struct {
+type DoubtlistConf struct {
 	NumSources struct {
 		Limit  int    `validate:"required"`
 		Action string `validate:"required"`
@@ -124,7 +123,7 @@ type GreylistConf struct {
 		Limit  int    `validate:"required"`
 		Action string `validate:"required"`
 	}
-	BlackTapir struct {
+	DenyTapir struct {
 		Tags   []string `validate:"required"`
 		Action string   `validate:"required"`
 	}
