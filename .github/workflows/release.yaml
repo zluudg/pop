@@ -16,18 +16,12 @@ jobs:
       - name: Get Artifacts
         id: get_artifacts
         run: |
-          echo "::set-output name=srcpath::$(ls ./dist/src/*.tar.gz)"
-          echo "::set-output name=srcfilename::$(basename ./dist/src/*.tar.gz)"
-          echo "::set-output name=binpath::$(ls ./dist/bin/tapir-pop)"
-          echo "::set-output name=binfilename::$(basename ./dist/bin/tapir-pop)"
-          echo "::set-output name=rpmpath::$(ls ./dist/rpm/RPMS/x86_64/*rpm)"
-          echo "::set-output name=rpmfilename::$(basename ./dist/rpm/RPMS/x86_64/*rpm)"
-      - name: Upload Tarball
-        run: ""
-      - name: Upload Binary
-        run: ""
-      - name: Upload rpm
-        run: ""
+          echo "srcpath=$(ls ./dist/src/*.tar.gz)" >> $GITHUB_OUTPUT
+          echo "srcfilename=$(basename ./dist/src/*.tar.gz)" >> $GITHUB_OUTPUT
+          echo "binpath=$(ls ./dist/bin/tapir-pop)" >> $GITHUB_OUTPUT
+          echo "binfilename=$(basename ./dist/bin/tapir-pop)" >> $GITHUB_OUTPUT
+          echo "rpmpath=$(ls ./dist/rpm/RPMS/x86_64/*rpm)" >> $GITHUB_OUTPUT
+          echo "rpmfilename=$(basename ./dist/rpm/RPMS/x86_64/*rpm)" >> $GITHUB_OUTPUT
       - name: Upload Tarball
         uses: actions/upload-release-asset@v1
         with:
