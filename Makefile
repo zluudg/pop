@@ -52,7 +52,7 @@ tarball: version.go
 
 srpm: SHELL:=/bin/bash
 srpm: tarball
-	test $$(grep Version $(SPECFILE) | awk '{ print $$2 }') == $(VERSION)
+	test $$(rpmspec -q --qf '%{version}' $(SPECFILE) 2>/dev/null || grep '^Version:' $(SPECFILE) | awk '{print $$2}') == $(VERSION)
 	mkdir -p rpm/{BUILD,RPMS,SRPMS}
 	cp $(PROG)-$(VERSION).tar.gz rpm/SOURCES/
 	rpmbuild -bs --define "%_topdir ./rpm" --undefine=dist $(SPECFILE)

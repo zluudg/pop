@@ -1,4 +1,5 @@
 Name:          tapir-pop
+# NOTE: Version must match VERSION file - validated by Makefile srpm target
 Version:       v0.3
 Release:       1%{?dist}
 Group:         dnstapir/edge
